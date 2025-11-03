@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<h2>{% if object %}Edit Task{% else %}Create Task{% endif %}</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">{% if object %}Update{% else %}Create{% endif %}</button>
+</form>
+<a href="{% url 'task_manager:task-list' %}">Cancel</a>

@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<h2>{{ object.name }}</h2>
+<p>{{ object.description }}</p>
+<p>Deadline: {{ object.deadline }}</p>
+<p>Priority: {{ object.priority }}</p>
+<p>Completed: {{ object.is_completed }}</p>
+<p>Assignees: {{ object.assignees.all|join:", " }}</p>
+<a href="{% url 'task_manager:task-update' object.id %}">Edit</a>
+<a href="{% url 'task_manager:task-delete' object.id %}">Delete</a>
+<a href="{% url 'task_manager:task-list' %}">Back</a>
