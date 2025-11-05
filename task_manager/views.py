@@ -63,7 +63,10 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
     template_name = "tasks/worker_detail.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["tasks"] = self.object.tasks.all()
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["tasks"] = self.object.tasks.all()
+    #     return context
+
+    def get_queryset(self):
+        return Task.objects.filter(assignees=self.request.user).order_by("deadline")

@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+
 
 from .models import (Worker,
                      Task,
@@ -8,7 +10,7 @@ from .models import (Worker,
 
 
 @admin.register(Worker)
-class WorkerAdmin(admin.ModelAdmin):
+class WorkerAdmin(UserAdmin):
     list_display = ("username", "email", "position")
 
 
