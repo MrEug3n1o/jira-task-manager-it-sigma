@@ -12,7 +12,7 @@ from .views import (
 app_name = "task_manager"
 
 urlpatterns = [
-    path("homepage/", Homepage.as_view(), name="homepage"),
+    path("", Homepage.as_view(), name="homepage"),
     path("task/", TaskListView.as_view(), name="task-list"),
     path("task/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
     path("task/create/", TaskCreateView.as_view(), name="task-create"),
