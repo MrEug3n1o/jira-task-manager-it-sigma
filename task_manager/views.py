@@ -55,13 +55,13 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = Worker
-    template_name = "tasks/worker_list.html"
+    template_name = "task_manager/worker_list.html"
     context_object_name = "workers"
 
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
-    template_name = "tasks/worker_detail.html"
+    template_name = "task_manager/worker_detail.html"
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)

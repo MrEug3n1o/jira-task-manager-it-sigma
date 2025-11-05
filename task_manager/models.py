@@ -9,11 +9,20 @@ class Position(models.Model):
         return self.name
 
 
+class Teams(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+
+class Project(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+
 class Worker(AbstractUser):
     position = models.ForeignKey(Position, on_delete=models.SET_NULL, null=True, related_name="workers")
-
+    team = models.ForeignKey(Teams, on_delete=models.SET_NULL, null=True, related_name="workers")
     def __str__(self):
         return f"{self.username} ({self.position})" if self.position else self.username
+
 
 
 class TaskType(models.Model):
@@ -41,7 +50,7 @@ class Task(models.Model):
     )
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE, related_name="tasks")
     assignees = models.ManyToManyField(Worker, related_name="tasks")
-
+    project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True, related_name="tasks")
     def __str__(self):
         return f"{self.name} ({self.priority})"
 
