@@ -1,0 +1,19 @@
+<h2>{{ object.first_name }} {{ object.last_name }}</h2>
+<p>Username: {{ object.username }}</p>
+<p>Email: {{ object.email }}</p>
+<p>Position: {{ object.position }}</p>
+
+<h3>Assigned Tasks</h3>
+<ul>
+  {% for task in tasks %}
+    <li>
+      <a href="{% url 'task_manager:task-detail' task.id %}">
+        {{ task.name }}
+      </a> - {{ task.priority }} {% if task.is_completed %}(Completed){% endif %}
+    </li>
+  {% empty %}
+    <li>No tasks assigned.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'task_manager:worker-list' %}">Back to Workers</a>

@@ -52,3 +52,18 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     form_class = TaskDeleteForm
     template_name = "task_manager/task_confirm_delete.html"
     success_url = reverse_lazy("task_manager:task-list")
+
+class WorkerListView(LoginRequiredMixin, generic.ListView):
+    model = Worker
+    template_name = "tasks/worker_list.html"
+    context_object_name = "workers"
+
+
+class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Worker
+    template_name = "tasks/worker_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tasks"] = self.object.tasks.all()
+        return context
