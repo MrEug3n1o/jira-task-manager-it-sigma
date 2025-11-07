@@ -1,9 +1,26 @@
-<h1>My tasks</h1>
-<a href="{% url 'task_manager:task-create' %}">Create New Task</a>
-<ul>
-  {% for task in object_list %}
-    <li>
-      <a href="{% url 'task_manager:task-detail' task.id %}">{{ task.name }}</a> - {{ task.priority }}
-    </li>
+{% extends "base.html" %}
+{% block title %}All Tasks{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="text-primary">All Tasks</h1>
+    <a href="{% url 'task_manager:homepage' %}" class="btn btn-success">+ New Task</a>
+</div>
+
+<div class="row">
+  {% for task in tasks %}
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ task.name }}</h5>
+        <p class="card-text">{{ task.description|truncatechars:100 }}</p>
+        <p><span class="badge bg-info">{{ task.priority }}</span></p>
+        <p>Deadline: {{ task.deadline }}</p>
+        <a href="{% url 'task_manager:task-detail' task.id %}" class="btn btn-primary btn-sm">View</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <p>No tasks available.</p>
   {% endfor %}
-</ul>
+</div>
+{% endblock %}

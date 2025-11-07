@@ -1,9 +1,22 @@
-<h2>{{ object.name }}</h2>
-<p>{{ object.description }}</p>
-<p>Deadline: {{ object.deadline }}</p>
-<p>Priority: {{ object.priority }}</p>
-<p>Completed: {{ object.is_completed }}</p>
-<p>Assignees: {{ object.assignees.all|join:", " }}</p>
-<a href="{% url 'task_manager:task-update' object.id %}">Edit</a>
-<a href="{% url 'task_manager:task-delete' object.id %}">Delete</a>
-<a href="{% url 'task_manager:task-list' %}">Back</a>
+{% extends "base.html" %}
+{% block title %}{{ object.name }}{% endblock %}
+{% block content %}
+<div class="card p-4">
+  <h2 class="text-primary">{{ object.name }}</h2>
+  <p class="mb-2"><strong>Description:</strong> {{ object.description }}</p>
+  <p><strong>Deadline:</strong> {{ object.deadline }}</p>
+  <p><strong>Priority:</strong> <span class="badge bg-info">{{ object.priority }}</span></p>
+  <p><strong>Status:</strong>
+     {% if object.is_completed %}
+       <span class="badge bg-success">Completed</span>
+     {% else %}
+       <span class="badge bg-warning text-dark">Pending</span>
+     {% endif %}
+  </p>
+  <p><strong>Assignees:</strong> {{ object.assignees.all|join:", " }}</p>
+  <div class="mt-3">
+    <a href="{% url 'task_manager:task-update' object.id %}" class="btn btn-outline-primary me-2">Edit</a>
+    <a href="{% url 'task_manager:task-delete' object.id %}" class="btn btn-outline-danger">Delete</a>
+  </div>
+</div>
+{% endblock %}

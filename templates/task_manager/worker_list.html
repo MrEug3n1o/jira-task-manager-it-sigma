@@ -1,14 +1,15 @@
-<h1>Workers</h1>
-<ul>
+{% extends "base.html" %}
+{% block title %}Workers{% endblock %}
+{% block content %}
+<h1 class="text-primary mb-4">Workers</h1>
+<div class="list-group">
   {% for worker in workers %}
-    <li>
-      <a href="{% url 'task_manager:worker-detail' worker.id %}">
-        {{ worker.first_name }} {{ worker.last_name }} ({{ worker.position }})
-      </a>
-    </li>
+    <a href="{% url 'task_manager:worker-detail' worker.id %}" class="list-group-item list-group-item-action">
+      <strong>{{ worker.first_name }} {{ worker.last_name }}</strong>
+      <small class="text-muted">— {{ worker.position }}</small>
+    </a>
   {% empty %}
-    <li>No workers found.</li>
+    <p>No workers available.</p>
   {% endfor %}
-</ul>
-
-<a href="{% url 'task_manager:task-list' %}">Back to Tasks</a>
+</div>
+{% endblock %}

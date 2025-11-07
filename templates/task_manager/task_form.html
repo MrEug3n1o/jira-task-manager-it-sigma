@@ -1,7 +1,13 @@
-<h2>{% if object %}Edit Task{% else %}Create Task{% endif %}</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">{% if object %}Update{% else %}Create{% endif %}</button>
-</form>
-<a href="{% url 'task_manager:task-list' %}">Cancel</a>
+{% extends "base.html" %}
+{% block title %}Task Form{% endblock %}
+{% block content %}
+<div class="card p-4">
+  <h2 class="text-primary mb-3">{% if object %}Edit Task{% else %}Create Task{% endif %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">{% if object %}Update{% else %}Create{% endif %}</button>
+    <a href="{% url 'task_manager:task-list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}
