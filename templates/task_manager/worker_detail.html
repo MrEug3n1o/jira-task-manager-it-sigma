@@ -13,6 +13,7 @@
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <a href="{% url 'task_manager:task-detail' task.id %}">{{ task.name }}</a>
         <span class="badge bg-info">{{ task.priority }}</span>
+        <span class="badge bg-info">Is completed: {{ task.is_completed }}</span>
       </li>
     {% empty %}
       <li class="list-group-item">No tasks assigned.</li>
