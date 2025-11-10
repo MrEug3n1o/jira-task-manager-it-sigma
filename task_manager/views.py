@@ -71,13 +71,33 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
 
 class TeamListView(LoginRequiredMixin, generic.ListView):
     model = Team
-    context_object_name = "teams_list"
     template_name = "task_manager/teams_list.html"
+    context_object_name = "teams"
     paginate_by = 3
+
+
+class TeamDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Team
+    template_name = "task_manager/teams_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["members"] = self.object.members.all()
+        return context
 
 
 class ProjectListView(LoginRequiredMixin, generic.ListView):
     model = Project
-    context_object_name = "project_list"
     template_name = "task_manager/project_list.html"
+    context_object_name = "projects"
     paginate_by = 3
+
+
+class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Project
+    template_name = "task_manager/project_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tasks"] = self.object.tasks.all()
+        return context
