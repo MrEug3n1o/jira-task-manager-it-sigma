@@ -19,6 +19,7 @@ app_name = "task_manager"
 
 urlpatterns = [
     path("", Homepage.as_view(), name="homepage"),
+
     path("task/", TaskListView.as_view(), name="task-list"),
     path("task/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
     path("task/create/", TaskCreateView.as_view(), name="task-create"),
@@ -26,8 +27,8 @@ urlpatterns = [
     path("task/<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"),
     path("workers/", WorkerListView.as_view(), name="worker-list"),
     path("workers/<int:pk>/", WorkerDetailView.as_view(), name="worker-detail"),
-    path("teams/", TeamListView.as_view(), name="team-list"),
-    path("teams/<int:pk>/", TeamDetailView.as_view(), name="team-detail"),
-    path("projects/", ProjectListView.as_view(), name="project-list"),
-    path("projects/<int:pk>/", ProjectDetailView.as_view(), name="project-detail"),
+    path("team/", TeamListView.as_view(), name="team-list"),
+    path("team/<int:pk>/", TeamDetailView.as_view(), name="team-detail"),
+    path("project/", ProjectListView.as_view(), name="project-list"),
+    path("project/<int:pk>/", ProjectDetailView.as_view(), name="project-detail"),
 ]

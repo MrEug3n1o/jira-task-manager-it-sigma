@@ -71,14 +71,14 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
 
 class TeamListView(LoginRequiredMixin, generic.ListView):
     model = Team
-    template_name = "task_manager/teams_list.html"
+    template_name = "task_manager/team_list.html"
     context_object_name = "teams"
     paginate_by = 3
 
 
 class TeamDetailView(LoginRequiredMixin, generic.DetailView):
     model = Team
-    template_name = "task_manager/teams_detail.html"
+    template_name = "task_manager/team_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
