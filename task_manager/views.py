@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -58,6 +58,18 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
     template_name = "task_manager/worker_list.html"
     context_object_name = "workers"
 
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        queryset = Worker.objects.all()
+        if query:
+            queryset = queryset.filter(
+                Q(username__icontains=query) |
+                Q(first_name__icontains=query) |
+                Q(last_name__icontains=query) |
+                Q(team__name__icontains=query)
+            )
+        return queryset
+
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
@@ -74,6 +86,17 @@ class TeamListView(LoginRequiredMixin, generic.ListView):
     template_name = "task_manager/team_list.html"
     context_object_name = "teams"
     paginate_by = 3
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        queryset = Task.objects.all()
+        if query:
+            queryset = queryset.filter(
+                Q(name__icontains=query) |
+                Q(description__icontains=query) |
+                Q(project__name__icontains=query)
+            )
+        return queryset
 
 
 class TeamDetailView(LoginRequiredMixin, generic.DetailView):

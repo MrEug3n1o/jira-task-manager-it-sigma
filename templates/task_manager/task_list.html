@@ -5,7 +5,18 @@
     <h1 class="text-primary">All Tasks</h1>
     <a href="{% url 'task_manager:task-create' %}" class="btn btn-success">+ New Task</a>
 </div>
-
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <form method="get" class="d-flex">
+    <input
+      type="text"
+      name="q"
+      class="form-control me-2"
+      placeholder="Search tasks..."
+      value="{{ request.GET.q }}"
+    />
+    <button class="btn btn-outline-primary" type="submit">Search</button>
+  </form>
+</div>
 <div class="row">
   {% for task in tasks %}
   <div class="col-md-4 mb-3">
