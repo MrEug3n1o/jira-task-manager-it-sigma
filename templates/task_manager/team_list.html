@@ -4,10 +4,7 @@
 <h1 class="text-primary mb-4">Teams</h1>
 <div class="list-group">
   {% for team in teams %}
-    <a href="{% url 'task_manager:team-detail' team.id %}" class="list-group-item list-group-item-action">
-      <strong>{{ team.name }}</strong>
-      <small class="text-muted d-block">Members: {{ team.get_workers }}</small>
-    </a>
+    <h1>Team: (( team ))</h1>
   {% empty %}
     <p>No teams available.</p>
   {% endfor %}

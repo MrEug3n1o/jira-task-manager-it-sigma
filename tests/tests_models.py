@@ -1,7 +1,8 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from datetime import date, timedelta
-from task_manager.models import Position, Team, Project, Worker, TaskType, Task
+
+from task_manager.models import Position, Teams, Project, Worker, TaskType, Task
 
 User = get_user_model()
 
@@ -10,7 +11,7 @@ class MinimalModelTests(TestCase):
 
     def test_basic_model_creation(self):
         position = Position.objects.create(name="Developer")
-        team = Team.objects.create(name="Backend Team")
+        team = Teams.objects.create(name="Backend Team")
         project = Project.objects.create(name="Website Redesign")
         task_type = TaskType.objects.create(name="Bug Fix")
 
@@ -32,7 +33,7 @@ class MinimalModelTests(TestCase):
         task.assignees.add(worker)
 
         self.assertEqual(Position.objects.count(), 1)
-        self.assertEqual(Team.objects.count(), 1)
+        self.assertEqual(Teams.objects.count(), 1)
         self.assertEqual(Project.objects.count(), 1)
         self.assertEqual(TaskType.objects.count(), 1)
         self.assertEqual(Worker.objects.count(), 1)

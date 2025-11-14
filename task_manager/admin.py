@@ -6,7 +6,7 @@ from .models import (Worker,
                      Task,
                      TaskType,
                      Position,
-                    Team,
+                    Teams,
                     Project,
                      )
 
@@ -38,7 +38,7 @@ class ProjectAdmin(admin.ModelAdmin):
     readonly_fields = ("get_tasks",)
 
 
-@admin.register(Team)
-class TeamAdmin(admin.ModelAdmin):
+@admin.register(Teams)
+class TeamsAdmin(admin.ModelAdmin):
     list_display = ("name", "get_workers")
     readonly_fields = ("get_workers",)

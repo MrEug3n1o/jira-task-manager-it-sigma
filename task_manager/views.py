@@ -6,7 +6,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import (
-Worker, Task, Team, Project
+Worker, Task, Teams, Project
 )
 from .forms import TaskCreateForm, TaskUpdateForm, TaskDeleteForm
 
@@ -82,25 +82,14 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
 
 
 class TeamListView(LoginRequiredMixin, generic.ListView):
-    model = Team
+    model = Teams
     template_name = "task_manager/team_list.html"
     context_object_name = "teams"
     paginate_by = 3
 
-    def get_queryset(self):
-        query = self.request.GET.get("q")
-        queryset = Task.objects.all()
-        if query:
-            queryset = queryset.filter(
-                Q(name__icontains=query) |
-                Q(description__icontains=query) |
-                Q(project__name__icontains=query)
-            )
-        return queryset
-
 
 class TeamDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Team
+    model = Teams
     template_name = "task_manager/team_detail.html"
 
     def get_context_data(self, **kwargs):
