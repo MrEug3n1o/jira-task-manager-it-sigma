@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ object.first_name }} {{ object.last_name }}{% endblock %}
+{% block content %}
+<div class="card p-4">
+  <h2 class="text-primary">{{ object.first_name }} {{ object.last_name }}</h2>
+  <p><strong>Username:</strong> {{ object.username }}</p>
+  <p><strong>Email:</strong> {{ object.email }}</p>
+  <p><strong>Position:</strong> {{ object.position }}</p>
+
+  <h4 class="mt-4">Assigned Tasks</h4>
+  <ul class="list-group">
+    {% for task in tasks %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="{% url 'task_manager:task-detail' task.id %}">{{ task.name }}</a>
+        <span class="badge bg-info">{{ task.priority }}</span>
+        <span class="badge bg-info">Is completed: {{ task.is_completed }}</span>
+      </li>
+    {% empty %}
+      <li class="list-group-item">No tasks assigned.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

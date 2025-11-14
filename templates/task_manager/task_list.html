@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}All Tasks{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="text-primary">All Tasks</h1>
+    <a href="{% url 'task_manager:task-create' %}" class="btn btn-success">+ New Task</a>
+</div>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <form method="get" class="d-flex">
+    <input
+      type="text"
+      name="q"
+      class="form-control me-2"
+      placeholder="Search tasks..."
+      value="{{ request.GET.q }}"
+    />
+    <button class="btn btn-outline-primary" type="submit">Search</button>
+  </form>
+</div>
+<div class="row">
+  {% for task in tasks %}
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ task.name }}</h5>
+        <p class="card-text">{{ task.description|truncatechars:100 }}</p>
+        <p><span class="badge bg-info">{{ task.priority }}</span></p>
+        <p>Deadline: {{ task.deadline }}</p>
+        <a href="{% url 'task_manager:task-detail' task.id %}" class="btn btn-primary btn-sm">View</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <p>No tasks available.</p>
+  {% endfor %}
+</div>
+{% endblock %}

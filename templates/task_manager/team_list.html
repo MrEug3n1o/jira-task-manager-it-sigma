@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Teams{% endblock %}
+{% block content %}
+<h1 class="text-primary mb-4">Teams</h1>
+<div class="list-group">
+  {% for team in teams %}
+    <h1>Team: (( team ))</h1>
+  {% empty %}
+    <p>No teams available.</p>
+  {% endfor %}
+</div>
+{% endblock %}

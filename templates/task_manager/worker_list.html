@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Workers{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="text-primary fw-bold">Workers</h1>
+  <form method="get" class="d-flex">
+    <input
+      type="text"
+      name="q"
+      class="form-control me-2"
+      placeholder="Search workers..."
+      value="{{ request.GET.q }}"
+    />
+    <button class="btn btn-outline-primary" type="submit">Search</button>
+  </form>
+</div>
+
+<div class="list-group">
+  {% for worker in workers %}
+    <a href="{% url 'task_manager:worker-detail' worker.id %}" class="list-group-item list-group-item-action">
+      <strong>{{ worker.first_name }} {{ worker.last_name }}</strong>
+      <small class="text-muted">— {{ worker.position }}</small>
+    </a>
+  {% empty %}
+    <p>No workers available.</p>
+  {% endfor %}
+</div>
+{% endblock %}
