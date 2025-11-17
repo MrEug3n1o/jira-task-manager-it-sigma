@@ -5,6 +5,13 @@
 With Sigma Task Manager, you can:
 - Organize projects and track progress in real time  
 - Collaborate with teammates seamlessly  
-- Enjoy an intuitive, visually appealing dashboard  
+- Enjoy an intuitive, visually appealing dashboard
+
+**Source URL:** "[https://jira-task-manager-it-sigma.onrender.com](https://jira-task-manager-it-sigma.onrender.com)"
+
+## Provided credentials
+
+* Username: "Worker1"
+* Password: "qwertyasdfghzxcvbn"
 
 > Stay productive. Stay organized. Stay Sigma.
